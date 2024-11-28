@@ -366,12 +366,13 @@ class Desbalanceo:
         return df_resampled
 
 
-## CALCULAR MÉTRICAS DE LOGISTICA
+## CALCULAR MÉTRICAS DE CLASIFICACIÓN
 
 def calcular_metricas(y_train, y_test, pred_train, pred_test, prob_test, prob_train):
     """
     Calcula métricas de rendimiento para el modelo seleccionado.
     """
+    
     # Métricas
     metricas_train = {
         "accuracy": accuracy_score(y_train, pred_train),
@@ -379,7 +380,8 @@ def calcular_metricas(y_train, y_test, pred_train, pred_test, prob_test, prob_tr
         "recall": recall_score(y_train, pred_train, average='weighted', zero_division=0),
         "f1": f1_score(y_train, pred_train, average='weighted', zero_division=0),
         "kappa": cohen_kappa_score(y_train, pred_train),
-        "auc": roc_auc_score(y_train, prob_train) if prob_train is not None else None        
+        "auc": roc_auc_score(y_train, prob_train) if prob_train is not None else None 
+
     }
     metricas_test = {
         "accuracy": accuracy_score(y_test, pred_test),
@@ -435,3 +437,4 @@ def plot_matriz_confusion(matriz_confusion, invertir=True, tamano_grafica=(4, 3)
         sns.heatmap(matriz_confusion, annot=True, fmt="d", xticklabels=labels, yticklabels=labels, cmap= color)    
         plt.xlabel("Predicción")
         plt.ylabel("Real");  
+
